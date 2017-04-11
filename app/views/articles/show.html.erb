@@ -12,13 +12,32 @@
 
 <p>
   <strong>Author:</strong>
-  <%= @article.author %>
+  <%= @article.user.email %>
 </p>
 
 <p>
   <strong>User:</strong>
   <%= @article.user_id %>
 </p>
+
+<p>
+	<strong>Comment</strong><br>
+	<% @article.comments.each do |comment| %>
+	<%= comment.content %>
+	<%= link_to 'コメントを削除', comment_path, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+	<% end %>
+</p>
+
+<%= form_for :comment do |f|%>
+	<div class="field">
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+    <%= f.hidden_field :article_id, :value => @article.id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
 
 <%= link_to 'Edit', edit_article_path(@article) %> |
 <%= link_to 'Back', articles_path %>
