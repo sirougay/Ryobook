@@ -1,0 +1,6 @@
+<br><%= @user.email %><br>
+
+<% @user.articles.each do |article| %>
+	<%= article.title %><br>
+	<%= article.author %><br>
+<% end %>
