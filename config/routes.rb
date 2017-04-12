@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :articles
   root to: "articles#index"
   post '/articles/:id' => 'comments#create'
-  delete 'comments/destroy' => 'comments#destroy' ,as: :comment
+  delete '/comments/:id' => 'comments#destroy' ,as: :comment
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

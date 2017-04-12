@@ -24,7 +24,7 @@
 	<strong>Comment</strong><br>
 	<% @article.comments.each do |comment| %>
 	<%= comment.content %>
-	<%= link_to 'コメントを削除', comment_path, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+	<%= link_to 'コメントを削除', comment, method: :delete, data: { confirm: 'Are you sure?' } %><br>
 	<% end %>
 </p>
 
