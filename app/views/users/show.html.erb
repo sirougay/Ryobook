@@ -1,7 +1,14 @@
 <br>
 <h1><%= @user.email %>さんの</h1><br>
 
+<h3>記事一覧</h3>
 <% @user.articles.each do |article| %>
-	<%= article.title %><br>
-	<%= article.author %><br>
+	記事タイトル: <%= link_to article.title, article %><br>
+	投稿者名: <%= article.author %><br>
+	<%= article.body %>
+	<% if article.liked_by? current_user %>
+  	<%= link_to 'いいね解除', article_likes_path(article), method: :delete %><br>
+  <% else %>
+    <%= link_to 'いいね', article_likes_path(article), method: :post %><br>
+  <% end %>
 <% end %>

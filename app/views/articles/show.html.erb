@@ -23,19 +23,22 @@
 <p>
 	<strong>Comment</strong><br>
 	<% @article.comments.each do |comment| %>
-	<%= comment.content %>
-	<%= link_to 'コメントを削除', comment, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+  <%= comment.poster.email %><br>
+  <%= comment.content %>
+	<%= link_to 'コメントを削除', comment, method: :delete, data: { confirm: 'Are you sure?' } %><br><br>
 	<% end %>
 </p>
 
-<%= form_for :comment do |f|%>
+<%= form_for :comment , :remote => true do |f|%>
 	<div class="field">
-    <%= f.label :content %>
+    <%= f.label :コメント %>
     <%= f.text_area :content %>
     <%= f.hidden_field :article_id, :value => @article.id %>
+    <%= f.hidden_field :poster_id, :value => current_user.id %>
+    <%= f.hidden_field :receiver_id, :value => @article.user.id %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "コメントを送信"%>
   </div>
 <% end %>
 
